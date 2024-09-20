@@ -1,6 +1,7 @@
 package com.tungdvs.mylanguagepartner.network.elevenlabs
 
-import com.tungdvs.mylanguagepartner.domain.model.Voice
+import com.tungdvs.mylanguagepartner.data.models.response.ElevenLabModel
+import com.tungdvs.mylanguagepartner.data.models.response.GetVoiceResponse
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import retrofit2.http.Body
@@ -11,8 +12,11 @@ import retrofit2.http.Query
 
 interface ElevenLabsService {
 
+    @GET("models")
+    suspend fun getModels(): List<ElevenLabModel>
+
     @GET("voices")
-    suspend fun getVoices(): List<Voice>
+    suspend fun getVoices(): GetVoiceResponse
 
     @POST("text-to-speech/{voice_id}")
     suspend fun textToSpeech(
